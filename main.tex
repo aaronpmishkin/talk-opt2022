@@ -1,0 +1,76 @@
+\documentclass[usenames,dvipsnames,mathserif,notheorems]{beamer}
+
+% silence annoying warnings
+\usepackage{silence}
+\usepackage{caption}
+\WarningFilter{remreset}{The remreset package}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\input{macros/math}
+\input{macros/plots}
+
+\usepackage{simplebeam}
+\usetheme{simplebeamer}
+
+% bib resources
+\addbibresource[]{refs.bib}
+
+\title{}
+\subtitle{}
+\author{Aaron Mishkin}
+%\institute{Stanford University}
+\collaborators{
+	\includegraphics[width=0.2\linewidth]{assets/aaron.png}
+}
+
+\titlegraphic{\includegraphics[width=0.4\textwidth]{assets/stanford.eps}}
+
+\newcommand{\horizontalrule}{
+	{
+			\vspace{-0.5em}
+			\center \rule{\textwidth}{0.1em}
+			\vspace{-0.2em}
+		}
+}
+
+\newcommand{\red}[1]{\textcolor{Red}{#1}}
+\newcommand{\green}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\blue}[1]{\textcolor{DarkBlue}{#1}}
+\newcommand{\purple}[1]{\textcolor{Magenta}{#1}}
+
+%\logo{\includegraphics[height=0.5cm]{assets/Block_S_2_color.eps}}
+
+%\institute{Stanford University}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%% main content starts %%
+
+\begin{frame}{}
+
+\end{frame}
+
+%% main content ends %%
+
+%% end slide
+\setbeamercolor{background canvas}{bg=LightCyan}
+
+\begin{frame}{}
+	\begin{center}
+		\huge Thanks for Listening!
+	\end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+%% bibliography
+\begin{frame}[allowframebreaks]{References}
+	\printbibliography[]
+\end{frame}
+
+
+\end{document}
