@@ -11,18 +11,21 @@
 \input{macros/math}
 \input{macros/plots}
 
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
 \usepackage{simplebeam}
 \usetheme{simplebeamer}
 
 % bib resources
 \addbibresource[]{refs.bib}
 
-\title{}
+\title{The Solution Path of the Group Lasso}
 \subtitle{}
-\author{Aaron Mishkin}
-%\institute{Stanford University}
+\author{Aaron Mishkin \and Mert Pilanci}
+\institute{Stanford University}
 \collaborators{
 	\includegraphics[width=0.2\linewidth]{assets/aaron.png}
+	\includegraphics[width=0.2\linewidth]{assets/mert.jpg}
 }
 
 \titlegraphic{\includegraphics[width=0.4\textwidth]{assets/stanford.eps}}
@@ -50,8 +53,103 @@
 \maketitle
 
 %% main content starts %%
+\begin{frame}{Summary of Contributions:}
 
-\begin{frame}{}
+\end{frame}
+
+
+\begin{frame}{Intro: Problem Setup}
+	\textbf{Problem Setup}:
+	\begin{itemize}
+		\item \( X \in \R^{n \times d} \) is a design matrix with associated targets \( y \in \R^n \).
+		\item \( \calB = \cbr{b_1, \ldots b_m} \) is a partition of the features.
+		\item \( \lambda \geq 0 \) controls the regularization strength.
+	\end{itemize}
+
+	\vspace{0.5em}
+	\pause
+
+	The \green{solution path} of the Group Lasso is given by
+	\[
+		\calW^*(\lambda) = \argmin_{w} \half \norm{X w - y}_2^2 + \lambda \sum_{\bi \in \calB} \norm{\wi}_2
+	\]
+
+	\horizontalrule
+	\pause
+
+	\red{Problem}: when is \( \lambda \mapsto \calW^*(\lambda) \) is single-valued and continuous?
+
+\end{frame}
+
+
+\begin{frame}{Motivation: the Importance of Continuity}
+
+	Consider the problem of minimizing the validation error,
+	\[
+		\calV(\lambda) = \min_{w^* \in \calW^*(\lambda)} \norm{\tilde X w^* - \tilde y}_2^2.
+	\]
+
+	\pause
+
+	\begin{figure}[]
+		\centering
+		\input{assets/discontinuity}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Motivation: the Importance of Continuity}
+
+	Consider the problem of minimizing the validation error,
+	\[
+		\calV(\lambda) = \min_{w^* \in \calW^*(\lambda)} \norm{\tilde X w^* - \tilde y}_2^2.
+	\]
+
+	\begin{figure}[]
+		\centering
+		\input{assets/discontinuity_grid}
+	\end{figure}
+
+	\pause
+	We must have \( \delta < \epsilon \),
+	which can be \red{arbitrarily small}!
+
+\end{frame}
+
+
+\begin{frame}{Main Challenge: Non-Linear Solution Paths}
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{assets/lasso_path.pdf}
+		\end{column}
+		\pause
+		\begin{column}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{assets/group_lasso_path.pdf}
+		\end{column}
+	\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Lemmas: Characterizing the Min-Norm Solution}
+
+\end{frame}
+
+
+\begin{frame}{Lemmas: Conditions for Uniqueness}
+
+\end{frame}
+
+
+\begin{frame}{Main Result: Continuity of the Solution Path}
+
+\end{frame}
+
+
+\begin{frame}{Summary}
 
 \end{frame}
 

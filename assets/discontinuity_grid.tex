@@ -1,0 +1,52 @@
+%! TEX root = ../main.tex
+
+%% Illustration of cone decomposition. 
+
+\begin{tikzpicture}[scale=1,
+		declare function={
+				cv(\x) = ((abs(\x)^3) / 4 - \x^2/2 + \x/2);
+				gmin(\x) = 4*(\x - 1)^2 - 2;
+			}
+	]
+	\begin{axis}[width=1.1\linewidth, height=6cm,
+			axis lines=center, yticklabels={,,}, xticklabels={,,},
+			ymin=-4, ymax=4, ytick={-5,...,5}, ylabel=$$, x axis line style={-},
+				xmin=-6, xmax=6, xtick={-5,...,5}, xlabel=$$, y axis line style={-},
+		]
+		% function
+		\addplot[name path=cv_left, domain=-6:0.8, samples=100, line width=1pt]{cv(x)};
+		\addplot[name path=cv_right, domain=1.2:6, samples=100, line width=1pt]{cv(x)};
+
+		%% discontinuity
+		\addplot[name path=cv_discont, domain=0.8:1.2, samples=10, line width=1pt]{gmin(x)};
+		\addplot +[mark=none, line width=1pt, dashed, draw=red] coordinates {(0.8, -1.85) (0.8, 0.22)};
+		\addplot +[mark=none, line width=1pt, dashed, draw=red] coordinates {(1.2, -1.85) (1.2, 0.322)};
+
+		\addplot +[mark=none, line width=1pt, dashed, draw=blue] coordinates {(0.8, 0.322) (0.8, 1.36)};
+		\addplot +[mark=none, line width=1pt, dashed, draw=blue] coordinates {(1.2, 0.322) (1.2, 1.36)};
+
+
+		% epsilon net 
+		\addplot [name path=cv_left, domain=-4:0.5, samples=8, only marks, mark=|, fill=blue, draw=DarkGreen, mark size=5, line width=1]{cv(x)};
+
+		\addplot [name path=cv_left, domain=1.5:5, samples=7, only marks, mark=|, fill=blue, draw=DarkGreen, mark size=5, line width=1]{cv(x)};
+
+		% labels
+
+		\node[label={270:$\lambda^*$}, circle, fill, inner sep=1.2pt] (opt) at (axis cs:1, -2) {};
+
+		\node[label={270:$\calV(\lambda)$}] at (axis cs:-2.4, 3) {};
+
+		\draw [decorate, decoration = {calligraphic brace}, line width=1.2pt] (axis cs:0.8, 1.43) --  (axis cs:1.2, 1.43);
+
+		\node[label={90:$\epsilon$}] at (axis cs:1.0, 1.41) {};
+
+
+		\draw [decorate, decoration = {calligraphic brace}, line width=1.2pt] (axis cs:-2.1, -0.5) --  (axis cs:-1.4, -0.5);
+
+		\node[label={90:$\delta$}] at (axis cs:-1.75, -0.7) {};
+
+		\node[label={$\Lambda = \cbr{\lambda_0 + i \delta : i \in \ceil{D / \delta}}$}] at (axis cs:-3.0, -4.0) {};
+	\end{axis}
+
+\end{tikzpicture}%

@@ -22,9 +22,9 @@
 	\vfill
 	\begingroup
 	\centering
-	\vskip0.75em%
 	\begin{beamercolorbox}[wd=\hsize, center]{titlebg}
 		\begin{beamercolorbox}[sep=8pt, center]{title}
+			\vskip0.25em%
 			\usebeamerfont{title}\inserttitle\par%
 			\ifx\insertsubtitle\@empty%
 			\else%
@@ -38,6 +38,7 @@
 		\end{beamercolorbox}
 		\begin{beamercolorbox}[sep=8pt,center]{author}
 			\usebeamerfont{author}\insertinstitute
+			\vskip-0.25em
 		\end{beamercolorbox}
 		\begin{beamercolorbox}[sep=8pt,center]{date}
 			\usebeamerfont{date}\insertdate
@@ -46,6 +47,7 @@
 			\vskip-0.75em
 			\@collaborators
 		\end{figure}
+		\vskip0.75em%
 	\end{beamercolorbox}
 	\endgroup
 }
