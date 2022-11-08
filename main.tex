@@ -11,7 +11,7 @@
 \input{macros/math}
 \input{macros/plots}
 
-\usetikzlibrary{decorations.pathreplacing,calligraphy}
+\usetikzlibrary{shapes, decorations.pathreplacing,calligraphy}
 
 \usepackage{simplebeam}
 \usetheme{simplebeamer}
@@ -53,8 +53,28 @@
 \maketitle
 
 %% main content starts %%
-\begin{frame}{Summary of Contributions:}
+\begin{frame}{Intro: Contributions}
+	\red{Problem}: Continuity of the group Lasso solution path is unknown.
+	\pause
+	\begin{itemize}
+		\item \textbf{Non-linear}: Unlike the classical lasso, the group Lasso path is non-linear \citep{efron2004least}.
+		      \pause
+		\item \textbf{Uniqueness}: The optimal solution is not unique in general.
+		      \pause
+		\item \textbf{Break Points}: There can be countably many potential discontinuities to check.
+	\end{itemize}
+	\pause
+	\horizontalrule
 
+	\green{Our Contributions}:
+	\begin{itemize}
+		\pause
+		\item We characterize the \textbf{optimal set} for the group lasso under general conditions.
+		      \pause
+		\item We establish \textbf{weaker sufficient conditions} for the solution to be unique.
+		      \pause
+		\item We prove \textbf{continuity} of the unique solution path.
+	\end{itemize}
 \end{frame}
 
 
@@ -77,12 +97,12 @@
 	\horizontalrule
 	\pause
 
-	\red{Problem}: when is \( \lambda \mapsto \calW^*(\lambda) \) is single-valued and continuous?
+	\red{Problem}: when is \( \lambda \mapsto \calW^*(\lambda) \) single-valued and continuous?
 
 \end{frame}
 
 
-\begin{frame}{Motivation: the Importance of Continuity}
+\begin{frame}{Intro: the Importance of Continuity}
 
 	Consider the problem of minimizing the validation error,
 	\[
@@ -98,7 +118,7 @@
 
 \end{frame}
 
-\begin{frame}{Motivation: the Importance of Continuity}
+\begin{frame}{Intro: the Importance of Continuity}
 
 	Consider the problem of minimizing the validation error,
 	\[
@@ -134,23 +154,126 @@
 \end{frame}
 
 
-\begin{frame}{Lemmas: Characterizing the Min-Norm Solution}
+\begin{frame}{Analysis: Equicorrelation Set}
+	\[
+		\textbf{Group Lasso}: \calW^*(\lambda) = \argmin_{w} \half \norm{X w - y}_2^2 + \lambda \sum_{\bi \in \calB} \norm{\wi}_2
+	\]
+	\pause
+	\horizontalrule
+
+	First-order optimality conditions are
+	\begin{equation*}\label{eq:fo-optimality}
+		\blue{\Xbi^\top} \red{(y - X w)} \in
+		\begin{cases}
+			\cbr{\lambda \frac{\wi}{\norm{\wi}_2}} & \mbox{if \( \wi \neq 0 \)} \\
+			\cbr{v : \norm{v}_2 \leq \lambda }     & \mbox{otherwise,}
+		\end{cases}
+	\end{equation*}
+
+	\pause
+
+	The \textbf{equicorrelation set} contains all non-zero blocks:
+	\begin{equation}\label{eq:equi}
+		\equi := \cbr{\bi \in \calB : \norm{\blue{\Xbi^\top} \red{(y - Xw)}}_2 = \lambda},
+	\end{equation}
+
+
+\end{frame}
+
+\begin{frame}{Analysis: Optimal Set}
+	Define the block-correlation vectors,
+	\[
+		\vi = \blue{\Xbi^\top} \red{(y - X w)}.
+	\]
+	and let \( w^* \in \solfn(\lambda) \) be the min-norm solution.
+	Define
+	\[
+		\calN_\lambda = \Null(\Xe) \bigcap \cbr{z : \zi \in \Span(\vi), i \in \equi }.
+	\]
+	\vspace{-2em}
+	\pause
+	\begin{proposition}
+		Let \( \lambda > 0 \).
+		The optimal set is given by
+		\[
+			\begin{aligned}
+				\solfn(\lambda) =
+				\big\{
+				w \in \R^d : \red{\we = \wmin_\equi(\lambda) + z,
+					z \in \calN_\lambda}, \,
+				w_{\inact} = 0, \, \\
+				\wi \neq 0 \implies \frac{\lambda \wi}{\norm{\wi}_2} = \vi(\lambda)
+				\big\}.
+			\end{aligned}
+		\]
+	\end{proposition}
+
+	\pause
+
+	The solution is \green{unique} when \( \calN_{\lambda} = \cbr{0} \).
+
+\end{frame}
+
+\begin{frame}{Analysis: Conditions for Uniqueness}
+
+	\textbf{Idea}: Study unique case by working backwards from \( \calN_\lambda = \cbr{0} \).
+
+	\vspace{1em}
+	\pause
+
+	\begin{beamercolorbox}[wd=\textwidth,sep=1em]{relaxation}
+		Assumption (Group General Position)
+
+		For every \( \calE \subseteq \calB \), \( \abs{\calE} \leq n +1 \),
+		there do not exist unit vectors \( \zi \in \R^{\abs{\bi}} \)
+		such that for any \( j \in \calE \),
+		\[
+			X_{b_j} z_{b_j} \in
+			\text{affine}(\cbr{\Xbi \zi : \bi \in \calE \setminus b_j}).
+		\]
+	\end{beamercolorbox}
+	\vspace{1em}
+	\pause
+
+	\begin{itemize}
+		\item Group general position extends the classical notion of general
+		      position, which is sufficient for uniqueness of the lasso \citep{tibshirani2013unique}.
+		      \pause
+
+		\item We formally prove group general position is \green{sufficient} for the
+		      group lasso to be unique.
+	\end{itemize}
 
 \end{frame}
 
 
-\begin{frame}{Lemmas: Conditions for Uniqueness}
+\begin{frame}{Analysis: Continuity of the Solution Path}
 
-\end{frame}
-
-
-\begin{frame}{Main Result: Continuity of the Solution Path}
-
-\end{frame}
-
-
-\begin{frame}{Summary}
-
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{assets/group_lasso_path.pdf}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\textbf{Proof Strategy}:
+			\begin{enumerate}
+				\pause
+				\item Establish continuity between breakpoints using
+				      the implicit function theorem.
+				      \pause
+				\item Show left and right limits at each break point
+				      are also solutions.
+				      \pause
+				\item Leverage uniqueness to deduce the left and right limits
+				      are equal.
+			\end{enumerate}
+			\pause
+			\begin{theorem}
+				Suppose group general position holds.
+				Then the unique group lasso solution path is continuous.
+			\end{theorem}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 %% main content ends %%

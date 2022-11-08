@@ -5,7 +5,7 @@
 \begin{tikzpicture}[scale=1,
 		declare function={
 				cv(\x) = ((abs(\x)^3) / 4 - \x^2/2 + \x/2);
-				gmin(\x) = 4*(\x - 1)^2 - 2;
+				gmin(\x) = 10*(\x - 1)^2 - 2;
 			}
 	]
 	\begin{axis}[width=1.1\linewidth, height=6cm,
@@ -19,12 +19,19 @@
 
 		%% discontinuity
 		\addplot[name path=cv_discont, domain=0.8:1.2, samples=10, line width=1pt]{gmin(x)};
-		\addplot +[mark=none, line width=1pt, dashed, draw=red] coordinates {(0.8, -1.85) (0.8, 0.22)};
-		\addplot +[mark=none, line width=1pt, dashed, draw=red] coordinates {(1.2, -1.85) (1.2, 0.322)};
+		%\addplot +[mark=none, line width=1pt, dashed, draw=red] coordinates {(0.8, -1.85) (0.8, 0.22)};
+		%\addplot +[mark=none, line width=1pt, dashed, draw=red] coordinates {(1.2, -1.85) (1.2, 0.322)};
+
+
 
 		\addplot +[mark=none, line width=1pt, dashed, draw=blue] coordinates {(0.8, 0.322) (0.8, 1.36)};
 		\addplot +[mark=none, line width=1pt, dashed, draw=blue] coordinates {(1.2, 0.322) (1.2, 1.36)};
 
+		\node [circle, fill=white, inner sep=1.2pt, draw=black, line width=1pt] at (axis cs:0.8, 0.22) {};
+		\node [circle, fill=white, inner sep=1.2pt, draw=black, line width=1pt] at (axis cs:1.2, 0.322) {};
+
+		\node [circle, fill=black, inner sep=1.0pt] at (axis cs:0.8, -1.6) {};
+		\node [circle, fill=black, inner sep=1.0pt] at (axis cs:1.2, -1.6) {};
 
 		% epsilon net 
 		%\addplot [name path=cv_left, domain=-4:0.5, samples=8, only marks, mark=|, fill=blue, draw=blue, mark size=5, line width=1]{cv(x)};
@@ -33,7 +40,7 @@
 
 		% labels
 
-		\node[label={270:$\lambda^*$}, circle, fill, inner sep=1.2pt] (opt) at (axis cs:1, -2) {};
+		\node[label={270:$\lambda^*$}, circle, fill=red, inner sep=1.4pt] (opt) at (axis cs:1, -2) {};
 
 		\node[label={270:$\calV(\lambda)$}] at (axis cs:-2.4, 3) {};
 
