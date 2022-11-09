@@ -11,7 +11,7 @@
 \input{macros/math}
 \input{macros/plots}
 
-\usetikzlibrary{shapes, decorations.pathreplacing,calligraphy}
+\usetikzlibrary{shapes, decorations.pathreplacing,calligraphy, shapes, arrows}
 
 \usepackage{simplebeam}
 \usetheme{simplebeamer}
@@ -42,6 +42,16 @@
 \newcommand{\green}[1]{\textcolor{ForestGreen}{#1}}
 \newcommand{\blue}[1]{\textcolor{DarkBlue}{#1}}
 \newcommand{\purple}[1]{\textcolor{Magenta}{#1}}
+
+% node styles
+\tikzstyle{Input}=[minimum size=0.3cm, fill=black, line width = 0.5mm, draw=black, shape=circle, text=black]
+\tikzstyle{Hidden}=[minimum size=0.3cm, fill=blue, line width = 0.5mm, draw=blue, shape=circle, text=black]
+\tikzstyle{Splits}=[inner sep=0.03cm, minimum size=0.3cm, line width = 0.3mm, draw=blue, shape=circle, text=black]
+\tikzstyle{Output}=[minimum size=0.3cm, fill=white, line width = 0.5mm, draw=black, shape=circle, text=black]
+
+% Edge styles
+\tikzstyle{arrow}=[line width = 0.5mm]
+
 
 %\logo{\includegraphics[height=0.5cm]{assets/Block_S_2_color.eps}}
 
@@ -102,7 +112,7 @@
 \end{frame}
 
 
-\begin{frame}{Intro: the Importance of Continuity}
+\begin{frame}{Intro: Importance of Continuity}
 
 	Consider the problem of minimizing the validation error,
 	\[
@@ -118,7 +128,7 @@
 
 \end{frame}
 
-\begin{frame}{Intro: the Importance of Continuity}
+\begin{frame}{Intro: Importance of Continuity}
 
 	Consider the problem of minimizing the validation error,
 	\[
@@ -134,6 +144,61 @@
 	We must have \( \delta < \epsilon \),
 	which can be \red{arbitrarily small}!
 
+\end{frame}
+
+\begin{frame}{Intro: Connection to Neural Networks}
+
+	\vspace{0.2em}
+	{\large Non-Convex ReLU Network}
+	\vspace{-1em}
+	\begin{columns}
+		\centering
+		\begin{column}{0.2\linewidth}
+			\small
+			\[
+				\begin{aligned}
+					\min_{W} & \norm{\sum_{j=1}^m (X W_{1j})_+ w_{2j} - y}_2^2                  \\
+					         & \quad + \lambda \sum_{j=1}^m \norm{W_{1j}}_2^2 + \norm{w_{2j}}^2
+				\end{aligned}
+			\]
+		\end{column}
+
+		\begin{column}{0.7\linewidth}
+			\begin{figure}[t]
+				\raggedleft
+				\input{assets/neural_net}
+			\end{figure}
+		\end{column}
+	\end{columns}
+
+	\pause
+	\horizontalrule
+
+	{\large Convex Reformulation} \citep{pilanci2020convex}
+	\vspace{-2em}
+	\begin{columns}
+		\begin{column}{0.2\linewidth}
+			\vspace{1.5em}
+			\small
+			\[
+				\begin{aligned}
+					\min_{v, w} & \norm{\sum_{j=1}^p D_j X (v_j - w_j) - y}_2^2                       \\
+					            & \hspace{0.1em } + \lambda \sum_{j=1}^p \norm{v_j}_2 + \norm{w_j}_2, \\
+					            & \hspace{0.1em}
+					\textcolor{red}{\text{s.t. }
+						v_j, w_j \in \calK_j \text{ for } j = 1,\ldots,p
+					}.
+				\end{aligned}
+			\]
+		\end{column}
+		\begin{column}{0.7\linewidth}
+			\vspace{-1.5em}
+			\begin{figure}[t]
+				\raggedleft
+				\input{assets/convex_reformulation}
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
